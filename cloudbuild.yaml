@@ -1,0 +1,18 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  id: Build
+  args:
+  - 'build'
+  - '--build-arg'
+  - 'version=$SHORT_SHA'
+  - '-t'
+  - 'europe-west2-docker.pkg.dev/fleet-coyote-341511/nap-theme/solr-9-1:$SHORT_SHA'
+  - '.'
+  - '--progress=plain'
+  - '--no-cache'
+
+- name: 'gcr.io/cloud-builders/docker'
+  id: Push
+  args:
+  - 'push'
+  - 'europe-west2-docker.pkg.dev/fleet-coyote-341511/nap-theme/solr-9-1:$SHORT_SHA'
